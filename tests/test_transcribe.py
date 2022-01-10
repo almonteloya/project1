@@ -1,6 +1,9 @@
 # write tests for transcribes
+import sys
+sys.path.append('/Users/anaalmonte/Documents/Algorithms/project1/seqparser')
+##This looks for the module in the seqparser folder
 
-from seqparser import (
+from seq import (
         transcribe,
         reverse_transcribe)
 
@@ -26,12 +29,9 @@ def test_transcribe():
     Write your unit test for the
     transcribe function here.
     """
-    pass
+    assert transcribe("ACTGAACCC")== "UGACUUGGG"
 
 
 def test_reverse_transcribe():
-    """
-    Write your unit test for the
-    reverse transcribe function here.
-    """
-    pass
+    assert reverse_transcribe("ACTGAACCC")== "GGGUUCAGU"
+

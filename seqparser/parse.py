@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+
+@author: anaalmonte
+"""
+
 import io
 from typing import Tuple, Union
 
@@ -29,7 +36,6 @@ class Parser:
         """
         Returns a sequencing record that will either be a tuple of two strings (header, sequence)
         or a tuple of three strings (header, sequence, quality). 
-
         # What's the deal with calling a method by almost the same name?
             it is common in python to see a public method calling a hidden method
             with a similar name. Both of these are accessible to a user (nothing is truly hidden in python)
@@ -41,7 +47,6 @@ class Parser:
         # Do I need to do this with all my classes?
             Absolutely not. But we want to show you some things you will see often when reading python code
             and give an explanation for why certain practices exist in the language. 
-
         """
         return self._get_record(f_obj)
 
@@ -49,22 +54,18 @@ class Parser:
         """
         This is an overriding of the Base Class Iterable function. All classes in python
         have this function, but it is not implemented for all classes in python. 
-
         # Note on the `__iter__` method
             Generally one doesn't call this method directly as `obj.__iter__()`. Instead it
             lets you use the object itself as an iterable. This is really useful in OOP because it
             allows you to represent and use iterable objects very cleanly. You still can call this
             method directly, but it really takes the fun out of python...
-
             ## How to use the `__iter__` method
             ```
             parser_obj = Parser(filename)
             for record in parser_obj:
               # do something
             ```
-
         # Why you should care about generators
-
             The expected behavior of this function is to create a generator which will lazily load
             the next item in its queue. These are very useful for many bioinformatic tools where you
             don't need everything loaded at once and instead are interested in interacting with the 
@@ -76,7 +77,6 @@ class Parser:
         
             instead of returning a value with the keyword `return`
             a generator must return a value with the keyword `yield`.
-
             This `yield` keyword will not shortcut the loop it is nested in like a return will
             and instead will pause the loop until the object is taken from it. 
         """
@@ -94,10 +94,13 @@ class Parser:
 
             # You will need to look at the `Try` / `Except` keywords in python
             # and implement an exception for the error you will find in
-            # the error message you receive. 
+            # the error message you receive.
             while True:
-                rec = self.get_record(f_obj)
-                yield rec
+                try:
+                    rec = self.get_record(f_obj)
+                    yield rec
+                except StopIteration: ##when it finsih iteerating iy
+                    break
 
     def _get_record(self, f_obj: io.TextIOWrapper) -> Union[Tuple[str, str], Tuple[str, str, str]]:
         """
@@ -114,17 +117,32 @@ class FastaParser(Parser):
     Fasta Specific Parsing
     """
     def _get_record(self, f_obj: io.TextIOWrapper) -> Tuple[str, str]:
-        """
-        returns the next fasta record
-        """
-
+        line = next(f_obj)
+        line=line.strip() ##strips the line form /n
+        if line.startswith(">"): ##this will idicate the header
+            identifier=line
+            line = next(f_obj) #the next line will be a sequence
+            line=line.strip()
+            sequence=line
+            return identifier,sequence ##return both
+            
 
 class FastqParser(Parser):
     """
     Fastq Specific Parsing
     """
-    def _get_record(self, f_obj: io.TextIOWrapper) -> Tuple[str, str, str]:
-        """
-        returns the next fastq record
-        """
+    def _get_record(self, f_obj: io.TextIOWrapper) -> Tuple[str, str]:
+        line = next(f_obj)
+        line=line.strip()
+        if line.startswith("@"):
+            identifier=line ## the first line contains the header
+            line = next(f_obj)
+            line=line.strip()
+            sequence=line #The next line contains the sequence
+            line = next(f_obj) # we skip the line with the +
+            line = next(f_obj)
+            line=line.strip()
+            quality=line #this is the quality
+            return identifier,sequence,quality
+            
 

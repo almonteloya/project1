@@ -1,6 +1,9 @@
 # write tests for parsers
+import sys
+sys.path.append('~/seqparser')
+##This looks for the module in the seqparser folder
 
-from seqparser import (
+from parse import (
         FastaParser,
         FastqParser)
 
@@ -28,7 +31,11 @@ def test_FastaParser():
     your FastaParser class and assert that it properly
     reads in the example Fasta File.
     """
-    pass
+    parser_obj = FastaParser("/Users/anaalmonte/Documents/Algorithms/project1/data/test.fa")
+    seq_out=[]
+    for record in parser_obj:
+        seq_out.append(record)
+    assert seq_out[0]==('>seq0', 'TGATTGAATCTTTTGAGGGTCACGGCCCGGAAGCCAGAATTTCGGGGTCCTCTGTGGATATTAATCGAGCCCACACGGTGTGAGTTCAGCGGCCCCCGCA')
 
 
 def test_FastqParser():
@@ -38,4 +45,9 @@ def test_FastqParser():
     your FastqParser class and assert that it properly
     reads in the example Fastq File.
     """
-    pass
+    parser_obj = FastqParser("/Users/anaalmonte/Documents/Algorithms/project1/data/test.fq")
+    seq_out=[]
+    for record in parser_obj:
+        seq_out.append(record)
+    assert seq_out[99] == ('@seq99', 'CCGAGTTTTGTAGTGGGCTCAACTGAAATCCTATTCTTAGACGATTGGTCATAAAACCCTTTCACTGTACGGACGTAGACCCTGCTCCGTCTTCCAGCAG', '2$7)*5:"=+++!:.=>!5>79)8!566$!3*/4$=4.%=//;900$9)!%)4%$=0":02"0=!0#/>+*1$1$39!.8+9<\'1$*1$321&<\'&9,)2')
+
