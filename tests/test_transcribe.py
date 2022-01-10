@@ -1,12 +1,9 @@
 # write tests for transcribes
-import sys
-sys.path.append('/Users/anaalmonte/Documents/Algorithms/project1/seqparser')
-##This looks for the module in the seqparser folder
+import pytest
 
-from seq import (
+from seqparser import (
         transcribe,
         reverse_transcribe)
-
 
 def test_freebie_transcribe_1():
     """

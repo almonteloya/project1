@@ -1,12 +1,7 @@
 # write tests for parsers
-import sys
-sys.path.append('/Users/anaalmonte/Documents/Algorithms/project1/seqparser')
-##This looks for the module in the seqparser folder
-
-from parse import (
+from seqparser import (
         FastaParser,
         FastqParser)
-
 
 def test_freebie_parser_1():
     """
