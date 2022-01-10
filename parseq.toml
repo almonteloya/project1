@@ -8,8 +8,8 @@ build-backend = "flit_core.buildapi"
 [project]
 name = py_parser
 authors = [{
-	name = Ana Laura Almonte,
-	email = ana.almonte@ucsf.edu
+	name = "Ana Laura Almonte",
+	email = "ana.almonte@ucsf.edu"
 	}]
 readme = "README.md"
 license = {file = "LICENSE"}
