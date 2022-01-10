@@ -26,7 +26,7 @@ def test_FastaParser():
     your FastaParser class and assert that it properly
     reads in the example Fasta File.
     """
-    parser_obj = FastaParser("/Users/anaalmonte/Documents/Algorithms/project1/data/test.fa")
+    parser_obj = FastaParser("./data/test.fa")
     seq_out=[]
     for record in parser_obj:
         seq_out.append(record)
@@ -40,7 +40,7 @@ def test_FastqParser():
     your FastqParser class and assert that it properly
     reads in the example Fastq File.
     """
-    parser_obj = FastqParser("/Users/anaalmonte/Documents/Algorithms/project1/data/test.fq")
+    parser_obj = FastqParser("./data/test.fq")
     seq_out=[]
     for record in parser_obj:
         seq_out.append(record)
