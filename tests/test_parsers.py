@@ -1,6 +1,6 @@
 # write tests for parsers
 import sys
-sys.path.append('~/seqparser')
+sys.path.append('/Users/anaalmonte/Documents/Algorithms/project1/seqparser')
 ##This looks for the module in the seqparser folder
 
 from parse import (
