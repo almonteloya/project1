@@ -120,6 +120,7 @@ class FastaParser(Parser):
         line = next(f_obj)
         line=line.strip() ##strips the line form /n
         if line.startswith(">"): ##this will idicate the header
+            line=line[1:] ##getting rid of the <
             identifier=line
             line = next(f_obj) #the next line will be a sequence
             line=line.strip()
@@ -135,6 +136,7 @@ class FastqParser(Parser):
         line = next(f_obj)
         line=line.strip()
         if line.startswith("@"):
+            line=line[1:] ## earasing @
             identifier=line ## the first line contains the header
             line = next(f_obj)
             line=line.strip()

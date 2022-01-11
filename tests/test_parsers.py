@@ -30,7 +30,7 @@ def test_FastaParser():
     seq_out=[]
     for record in parser_obj:
         seq_out.append(record)
-    assert seq_out[0]==('>seq0', 'TGATTGAATCTTTTGAGGGTCACGGCCCGGAAGCCAGAATTTCGGGGTCCTCTGTGGATATTAATCGAGCCCACACGGTGTGAGTTCAGCGGCCCCCGCA')
+    assert seq_out[0]==('seq0', 'TGATTGAATCTTTTGAGGGTCACGGCCCGGAAGCCAGAATTTCGGGGTCCTCTGTGGATATTAATCGAGCCCACACGGTGTGAGTTCAGCGGCCCCCGCA')
 
 
 def test_FastqParser():
@@ -44,5 +44,5 @@ def test_FastqParser():
     seq_out=[]
     for record in parser_obj:
         seq_out.append(record)
-    assert seq_out[99] == ('@seq99', 'CCGAGTTTTGTAGTGGGCTCAACTGAAATCCTATTCTTAGACGATTGGTCATAAAACCCTTTCACTGTACGGACGTAGACCCTGCTCCGTCTTCCAGCAG', '2$7)*5:"=+++!:.=>!5>79)8!566$!3*/4$=4.%=//;900$9)!%)4%$=0":02"0=!0#/>+*1$1$39!.8+9<\'1$*1$321&<\'&9,)2')
+    assert seq_out[99] == ('seq99', 'CCGAGTTTTGTAGTGGGCTCAACTGAAATCCTATTCTTAGACGATTGGTCATAAAACCCTTTCACTGTACGGACGTAGACCCTGCTCCGTCTTCCAGCAG', '2$7)*5:"=+++!:.=>!5>79)8!566$!3*/4$=4.%=//;900$9)!%)4%$=0":02"0=!0#/>+*1$1$39!.8+9<\'1$*1$321&<\'&9,)2')
 
